@@ -6,6 +6,13 @@ https://github.com/hampei/omniauth-saml-rmunify
 
 ## master
 
+## 2.0.0 (2014-02-17)
+
+* Added app_licence underscore hash keys.
+* Removed app_licence camelcased keys.
+* Added app_name, package_name, school_type and term to the licence hash.
+* Made is_unify_admin a boolean.
+* Made licence.is_connector and licence.is_trial booleans.
 
 ## 1.0.0 (2014-02-15)
 

@@ -27,7 +27,7 @@ module OmniAuth
           :display_name      => @attributes['urn:oid:2.16.840.1.113730.3.1.241'],
           :role              => @attributes['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'],
           :scope_affiliation => @attributes['urn:oid:1.3.6.1.4.1.5923.1.1.1.9'],
-          :is_unify_admin    => @attributes['http://schemas.rm.com/identity/claims/isunifyadmin'],
+          :is_unify_admin    => @attributes['http://schemas.rm.com/identity/claims/isunifyadmin'] == 'True',
           :year_of_entry     => @attributes['http://schemas.rm.com/identity/claims/yearofentry'],
           :app_licence       => licence,
           :app_user_id       => @attributes['http://schemas.rm.com/identity/claims/appuserid'],
@@ -35,9 +35,27 @@ module OmniAuth
         }
       end
 
-      private def licence
+      private
+
+      def licence
         licence_str =  @attributes['http://schemas.rm.com/identity/claims/applicence']
-        licence = Hash[licence_str[1..-2].split('|').map{|kv| kv.split(':')}]
+        licence = Hash[licence_str[1..-2].split('|').map{|kv|
+          (k,v) = kv.split(':')
+          [k.underscore, v]
+        }]
+        licence['is_trial'] = licence['is_trial'] == 'True'
+        licence['is_connector'] = licence['is_connector'] == 'True'
+        licence.merge!(licence_description(licence))
+      end
+
+      def licence_description(licence)
+        desc = licence['description'].split('/')
+        {
+          :app_name     => desc[0],
+          :package_name => desc[1],
+          :school_type  => desc[2],
+          :term         => desc[3]
+        }
       end
     end
   end

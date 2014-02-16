@@ -37,6 +37,17 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 end
 ```
 
+In your callback:
+
+```ruby
+  def saml_rmunify
+    uid = request.env["omniauth.auth"].uid
+    info = request.env["omniauth.auth"].info
+    info.licence # {"is_trial"=>false, "is_connector"=>false, "description"=>".../premium/Pri/1y/RMUnify",
+                 #  "app_name"=>"...", "package_name"=>"premium", "school_type"=>"Pri", "term"=>"1y"}
+  end
+```
+
 ## Authors
 
 Authored by Henk van der Veen.
