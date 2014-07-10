@@ -11,7 +11,7 @@ module OmniAuth
           :email             => @attributes['urn:oid:0.9.2342.19200300.100.1.3'],
           :name              => @attributes['urn:oid:2.16.840.1.113730.3.1.241'] ||
                                 @attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'] ||
-                                @attributes['urn:oid:2.5.4.42'] + ' ' + @attributes['urn:oid:2.5.4.4'],
+                                "#{@attributes['urn:oid:2.5.4.42']} #{@attributes['urn:oid:2.5.4.4']}",
           :nickname          => @attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'],
           :first_name        => @attributes['urn:oid:2.5.4.42'],
           :last_name         => @attributes['urn:oid:2.5.4.4'],

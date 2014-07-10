@@ -6,6 +6,10 @@ https://github.com/hampei/omniauth-saml-rmunify
 
 ## master
 
+## 2.0.1 (2014-07-10)
+
+* Fixed possible error when displayname, username nor firstname are all not available in the callback.
+
 ## 2.0.0 (2014-02-17)
 
 * Added app_licence underscore hash keys.
