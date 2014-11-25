@@ -39,23 +39,30 @@ module OmniAuth
 
       def licence
         licence_str =  @attributes['http://schemas.rm.com/identity/claims/applicence']
-        licence = Hash[licence_str[1..-2].split('|').map{|kv|
-          (k,v) = kv.split(':')
-          [k.underscore, v]
-        }]
-        licence['is_trial'] = licence['is_trial'] == 'True'
-        licence['is_connector'] = licence['is_connector'] == 'True'
-        licence.merge!(licence_description(licence))
+        if defined?(licence_str) && (licence_str.nil? != true) then
+          licence = Hash[licence_str[1..-2].split('|').map{|kv|
+            (k,v) = kv.split(':')
+            [k.underscore, v]
+          }]
+          licence['is_trial'] = licence['is_trial'] == 'True'
+          licence['is_connector'] = licence['is_connector'] == 'True'
+          licence.merge!(licence_description(licence))
+        elsif 
+          Rails.logger.debug("Licensing information is not available!")
+          licence = nil
+        end
       end
 
       def licence_description(licence)
-        desc = licence['description'].split('/')
-        {
-          :app_name     => desc[0],
-          :package_name => desc[1],
-          :school_type  => desc[2],
-          :term         => desc[3]
-        }
+        if (licence.nil != true) then
+          desc = licence['description'].split('/')
+          {
+            :app_name     => desc[0],
+            :package_name => desc[1],
+            :school_type  => desc[2],
+            :term         => desc[3]
+          }
+        end
       end
     end
   end
