@@ -39,15 +39,14 @@ module OmniAuth
 
       def licence
         licence_str =  @attributes['http://schemas.rm.com/identity/claims/applicence']
-        unless licence_str.nil?
-          licence = Hash[licence_str[1..-2].split('|').map{|kv|
-            (k,v) = kv.split(':')
-            [k.underscore, v]
-          }]
-          licence['is_trial'] = licence['is_trial'] == 'True'
-          licence['is_connector'] = licence['is_connector'] == 'True'
-          licence.merge!(licence_description(licence))
-        end
+        return nil if licence_str.nil? || licence_str.empty?
+        licence = Hash[licence_str[1..-2].split('|').map{|kv|
+          (k,v) = kv.split(':')
+          [k.underscore, v]
+        }]
+        licence['is_trial'] = licence['is_trial'] == 'True'
+        licence['is_connector'] = licence['is_connector'] == 'True'
+        licence.merge!(licence_description(licence))
       end
 
       def licence_description(licence)
