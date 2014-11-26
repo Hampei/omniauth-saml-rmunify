@@ -39,6 +39,7 @@ module OmniAuth
 
       def licence
         licence_str =  @attributes['http://schemas.rm.com/identity/claims/applicence']
+        return nil if licence_str.nil? || licence_str.empty?
         licence = Hash[licence_str[1..-2].split('|').map{|kv|
           (k,v) = kv.split(':')
           [k.underscore, v]
