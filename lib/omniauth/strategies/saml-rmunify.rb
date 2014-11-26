@@ -54,7 +54,7 @@ module OmniAuth
       end
 
       def licence_description(licence)
-        if (licence.nil != true) then
+        if (licence.nil? != true) then
           desc = licence['description'].split('/')
           {
             :app_name     => desc[0],
