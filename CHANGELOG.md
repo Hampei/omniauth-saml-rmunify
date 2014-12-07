@@ -6,6 +6,10 @@ https://github.com/hampei/omniauth-saml-rmunify
 
 ## master
 
+## 2.0.3 (2014-12-07)
+
+* Relaxed omniauth-saml version dependency.
+
 ## 2.0.2 (2014-11-26)
 
 * Fixes error when license info is not given.
