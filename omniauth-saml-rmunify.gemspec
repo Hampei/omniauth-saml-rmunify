@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.email         = 'henk.van.der.veen@gmail.com'
   gem.homepage      = 'https://github.com/hampei/omniauth-saml-rmunify'
 
-  gem.add_runtime_dependency 'omniauth-saml', '~> 1.1.0'
+  gem.add_runtime_dependency 'omniauth-saml', '~> 1.1'
 
   gem.files         = ['README.md', 'CHANGELOG.md'] + Dir['lib/**/*.rb']
   gem.require_paths = ["lib"]
