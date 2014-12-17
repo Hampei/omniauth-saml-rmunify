@@ -28,12 +28,16 @@ gem 'omniauth-saml-rmunify'
 and in `config/initializers/omniauth.rb`:
 
 ```ruby
+RM_UNIFY_SETTINGS = {
+  base_url:                       "https://sts.platform.rmunify.com",
+  assertion_consumer_service_url: "https://#{app_host}/users/auth/saml_rmunify/callback",
+  issuer:                         "https://#{app_host}/rmunify",
+  idp_sso_target_url:             "https://sts.platform.rmunify.com/issue/saml/?binding=redirect",
+  idp_cert_fingerprint:           "66:cb:2d:02:cd:81:f1:b1:03:22:6b:a0:21:cd:8e:69:0c:5e:f4:25",
+  idp_slo_target_url:             'https://sts.platform.rmunify.com/issue/samlSLO/?binding=redirect'
+}
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :saml_rmunify,
-    assertion_consumer_service_url: "https://#{app_host}/users/auth/saml_rmunify/callback",
-    issuer:                         "https://#{app_host}/rmunify",
-    idp_sso_target_url:             "https://sts.platform.rmunify.com/issue/saml/?binding=redirect",
-    idp_cert_fingerprint:           "66:cb:2d:02:cd:81:f1:b1:03:22:6b:a0:21:cd:8e:69:0c:5e:f4:25",
+  provider :saml_rmunify, RM_UNIFY_SETTINGS
 end
 ```
 
