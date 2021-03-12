@@ -24,7 +24,6 @@ module OmniAuth
           :organization_guid => @attributes['http://schemas.rm.com/identity/claims/organisationid'],
           :organization_name => @attributes['urn:oid:2.5.4.10'],
           :organization_code => @attributes['http://schemas.rm.com/identity/claims/organisationCode'],
-          :display_name      => @attributes['urn:oid:2.16.840.1.113730.3.1.241'],
           :role              => @attributes['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'],
           :scope_affiliation => @attributes['urn:oid:1.3.6.1.4.1.5923.1.1.1.9'],
           :is_unify_admin    => @attributes['http://schemas.rm.com/identity/claims/isunifyadmin'] == 'True',
